@@ -1,0 +1,239 @@
+@font-face {
+  font-family: 'Consolas';
+  src: url('fonts/Consolas.woff2') format('woff2'),
+       url('fonts/Consolas.woff') format('woff'),
+       url('fonts/Consolas.ttf') format('truetype');
+  font-display: swap;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+* {
+  font-family: 'Consolas', Monaco, 'Courier New', monospace;
+  cursor: url('media/cursor.png'), default;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+a {
+  color: #e4e3e3;
+  text-decoration: none;
+}
+
+body {
+  color: #e4e3e3;
+  background-color: rgb(50, 50, 50);
+  overflow-x: hidden;
+}
+
+#line {
+  width: 100%;
+  height: 100%;
+  border-top: 5px solid #c75353;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+#brand {
+  margin-left: 0.65pc;
+}
+
+#pattern {
+  background: transparent url('media/dot.png') repeat 0 0;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#background {
+  z-index: -2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 135%;
+  min-height: 110%;
+  width: auto;
+  height: auto;
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+  overflow: hidden;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.box,
+body,
+input {
+  background-color: rgb(13, 13, 13);
+}
+
+.skip {
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.clickables:hover {
+  color: #c75353;
+  text-decoration: none;
+}
+
+.container {
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.main {
+  overflow: hidden;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -3;
+}
+
+.fade-in {
+  opacity: 0;
+  display: block;
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+.fade-out {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+.credits {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: rgb(80, 80, 80);
+  font-size: 12px;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 15px;
+}
+
+.shop-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.shop-content > div {
+  flex: 1 1 400px;
+  max-width: 400px;
+}
+
+.shop-content h1 {
+  display: block;
+  width: 100%;
+}
+
+.button {
+  text-align: center;
+  width: 100%;
+}
+
+.discord-status {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: -7px;
+  font-family: Consolas, monospace;
+  width: 225px;
+}
+
+.discord-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.discord-info {
+  flex: 1;
+}
+
+.discord-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+#discord-activity {
+  color:rgb(120, 120, 120);
+}
+
+.status-online { background-color: #43b581; }
+.status-idle { background-color: #faa61a; }
+.status-dnd { background-color: #f04747; }
+.status-offline { background-color: #747f8d; }

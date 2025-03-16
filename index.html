@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>m</title>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="mcdrive.lol | website"/>
+    <meta property="og:title" content="mcdrive.lol"/>
+    <meta property="og:description" content="mcdrive.lol | website"/>
+    <meta property="og:image" content="assets/favicon.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="shortcut icon" href="assets/media/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles.css"/>
+    <link rel="preload" href="assets/media/music.mp3" as="fetch">
+    <link rel="preload" href="assets/media/video.mp4" as="fetch">
+    <div id="line"></div>
+  </head>
+  <body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.6.1/jquery.marquee.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.1.0/typed.umd.js"></script>
+    <script type="text/javascript" src="assets/app.js"></script>
+    <div id="main"></div>
+    <div class="container" style="display: none;">
+      <div class="index-content">
+        <h1>mcdrive.lol</h1>
+        <p><span id="brand"></span></p>
+        <div class="discord-status">
+          <img class="discord-avatar" id="discord-avatar" src="" alt="Discord Avatar">
+          <div class="discord-info">
+            <div class="discord-name">
+              <span class="status-dot" id="status-dot"></span>
+              <span id="discord-username"></span>
+            </div>
+            <div id="discord-activity"></div>
+          </div>
+        </div>        
+        <br>
+        <a class="clickables" href="#" id="shop-link-1">[ shop ]</a>
+        <a class="clickables" href="#" id="shop-link-2">[ socials ]</a>
+      </div>
+      <div class="shop-content" id="shop-panel-1" style="display: none;">
+        <h1>[ shop ]</h1>
+        <div>
+          <img class="card-img-top" src="assets/media/shop/source.png" alt="Image">
+          <div class="card-body">
+            <br><h4>perm spoofer (source code)</h4>
+            <p>price | 29.99€</p><br>
+          </div>
+        </div>
+        <a class="clickables button" href="#" id="back-link-1">[ back ]</a>
+      </div>
+      <div class="shop-content" id="shop-panel-2" style="display: none;">
+        <h1>[ socials ]</h1>
+        <a class="clickables" href="https://discord.com/users/737952916123549737" target="_blank">[ <i class="fab fa-discord"></i> discord ]</a>
+        <a class="clickables" href="https://t.me/vzpyr" target="_blank">[ <i class="fab fa-telegram"></i> telegram ]</a>
+        <a class="clickables" href="https://github.com/vzpyr" target="_blank">[ <i class="fab fa-github"></i> github ]</a>
+        <a class="clickables" href="https://anilist.co/user/vzpyr" target="_blank">[ <i class="fas fa-play"></i> anilist ]</a>
+        <a class="clickables button" href="#" id="back-link-2">[ back ]</a>
+      </div>      
+    </div>
+    </div>
+    <p class="credits">by v1per</p>
+    <div class="background" style="display: none;">
+      <div id="pattern"></div>
+      <audio id="audio" loop="">
+        <source src="assets/media/music.mp3" type="audio/mp3" />
+        <script>
+          const audio = document.getElementById('audio');
+          app.audioElement = audio;
+          app.audioElement.volume = 0;
+        </script>
+      </audio>
+      <div class="overlay"></div>
+        <video id="background" loop="">
+          <source src="assets/media/video.mp4" type="video/mp4" />
+          <script>
+            const video = document.getElementById('background');
+            app.videoElement = video;
+            app.videoElement.volume = 0;
+          </script>
+        </video>
+    </div>
+    <a class="skip">[ click me ]</a>
+  </body>
+</html>
