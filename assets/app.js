@@ -2,23 +2,17 @@
 
 class App {
   constructor() {
-    this.id = 0;
     this.videoElement = null;
     this.audioElement = null;
     this.musicVolume = 0.04;
     this.musicFadeIn = 1000;
     this.skippedIntro = false;
     this.backgroundToggler = false;
-    this.shouldIgnoreVideo = false;
-    this.effects = ['bounce', 'flash', 'pulse', 'rubberBand', 'shake', 'swing', 'tada', 'wobble', 'jello'];
-    this.brandDescription = [
-      'welcome to mcdrive.lol'
-    ];
   }
 
   init() {
     this.setupEventListeners();
-    this.titleChanger(['m', 'mc', 'mcd', 'mcdr', 'mcdri', 'mcdriv', 'mcdrive', 'mcdrive.', 'mcdrive.l', 'mcdrive.lo', 'mcdrive.lol', 'mcdrive.lo', 'mcdrive.l', 'mcdrive.', 'mcdrive', 'mcdriv', 'mcdri', 'mcdr', 'mcd', 'mc']);
+    this.changeTitle(['m', 'mc', 'mcd', 'mcdr', 'mcdri', 'mcdriv', 'mcdrive', 'mcdrive.', 'mcdrive.l', 'mcdrive.lo', 'mcdrive.lol', 'mcdrive.lo', 'mcdrive.l', 'mcdrive.', 'mcdrive', 'mcdriv', 'mcdri', 'mcdr', 'mcd', 'mc']);
     this.updateDiscordStatus();
     setInterval(() => this.updateDiscordStatus(), 20000);
   }
@@ -27,9 +21,9 @@ class App {
     document.addEventListener('contextmenu', (event) => event.preventDefault());
     document.body.onkeyup = (event) => this.handleKeyPress(event);
     $('.skip').click(() => this.skipIntro());
-      document.querySelectorAll('[id^="back-link-"]').forEach(link => {
-        link.addEventListener('click', (e) => this.toggleBack(e));
-      });
+    document.querySelectorAll('[id^="back-link-"]').forEach(link => {
+      link.addEventListener('click', (e) => this.toggleBack(e));
+    });
     document.querySelectorAll('[id^="shop-link-"]').forEach(link => {
       link.addEventListener('click', (e) => {
         const panelId = e.target.id.replace('shop-link-', 'shop-panel-');
@@ -57,51 +51,25 @@ class App {
     }, 500);
     $('#main').fadeOut(500, () => {
       $('#main').remove();
-      this.setupMarquee();
-      this.animateBrandHeader();
       this.setupBrandTyping();
       this.playMedia();
     });
   }
-  
-
-  setupMarquee() {
-    $('#marquee').marquee({
-      duration: 15000,
-      gap: 420,
-      delayBeforeStart: 1000,
-      direction: 'left',
-      duplicated: true,
-    });
-  }
-
-  animateBrandHeader() {
-    setTimeout(() => {
-      $('.brand-header').animateCss(this.effects[Math.floor(Math.random() * this.effects.length)]);
-    }, 200);
-  }
 
   setupBrandTyping() {
     new Typed('#brand', {
-      strings: this.brandDescription,
+      strings: ['welcome to mcdrive.lol'],
       typeSpeed: 40,
       loop: true,
     });
   }
 
   playMedia() {
-    if (!this.shouldIgnoreVideo) {
-      this.videoElement.play();
-      this.audioElement.play();
-      this.videoElement.addEventListener('timeupdate', () => {
-        $.cookie('videoTime', this.videoElement.currentTime, { expires: 1 });
-      }, false);
-    }
-    $('.marquee-container').css('visibility', 'visible').hide().fadeIn(100);
-    $('.marquee-container').animateCss('zoomIn');
+    this.videoElement.play();
+    this.audioElement.play();
     $('.container').fadeIn();
     $('.background').fadeIn(200, () => {
-      if (!this.shouldIgnoreVideo) $('#audio').animate({ volume: this.musicVolume }, this.musicFadeIn);
+      $('#audio').animate({ volume: this.musicVolume }, this.musicFadeIn);
     });
   }
 
@@ -127,7 +95,7 @@ class App {
     }, 500);
   }
 
-  titleChanger(titles) {
+  changeTitle(titles) {
     let counter = 0;
     const interval = 250;
     let timeoutId;
@@ -146,17 +114,13 @@ class App {
       .then(response => response.json())
       .then(data => {
         if (!data.success) return;
-        
         const user = data.data.discord_user;
         const avatar = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=80`;
         const status = data.data.discord_status;
-        
         document.getElementById('discord-avatar').src = avatar;
         document.getElementById('discord-username').textContent = user.global_name || user.username;
-        
         const statusDot = document.getElementById('status-dot');
         statusDot.className = `status-dot status-${status}`;
-        
         const activityEl = document.getElementById('discord-activity');
         if (data.data.listening_to_spotify) {
           activityEl.textContent = `🎶 ${data.data.spotify.song} by ${data.data.spotify.artist}`;
@@ -176,8 +140,9 @@ class App {
           activityEl.textContent = status.charAt(0).toUpperCase() + status.slice(1);
         }
       });
-  }}
-  
+  }
+}
+
 $.fn.extend({
   animateCss: function (animationName) {
     const animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
