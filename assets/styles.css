@@ -1,0 +1,225 @@
+@font-face {
+  font-family: 'Consolas';
+  src: url('media/Consolas.woff2') format('woff2'),
+       url('media/Consolas.woff') format('woff');
+  font-display: swap;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+* {
+  font-family: 'Consolas', Monaco, 'Courier New', monospace;
+  cursor: url('media/cursor.png'), default;
+  padding: 0;
+  margin: 0;
+  user-select: none;
+}
+body {
+  background-color: #101010;
+  height: 100vh;
+}
+a {
+  color: #e4e3e3;
+  text-decoration: none;
+}
+a.clickables:hover {
+  color: #383F29;
+}
+h1 {
+  color: #fff;
+  display: block;
+  width: 100%;
+}
+.bold {
+  font-weight: bold;
+}
+line {
+  width: 100%;
+  border-top: 5px solid #383F29;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+.container, .skip {
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.credits {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: rgb(80, 80, 80);
+  font-size: 12px;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -3;
+}
+.background video {
+  z-index: -2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  filter: blur(5px);
+  opacity: 0.5;
+}
+.background pattern {
+  background: transparent url('media/dot.png') repeat 0 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.fade-in {
+  opacity: 0;
+  display: block;
+  animation: fadeIn 0.5s ease-in forwards;
+}
+.fade-out {
+  opacity: 1;
+  animation: fadeOut 0.5s ease-out forwards;
+}
+.shop-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.shop-content > div {
+  flex: 1 1 400px;
+  max-width: 400px;
+}
+.card-img-top {
+  width: 80%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 15px;
+}
+.back {
+  text-align: center;
+  width: 100%;
+}
+.volume-control {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 15px;
+  border-radius: 20px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  width: 100px;
+}
+.volume-control:hover {
+  opacity: 1 !important;
+}
+.volume-icon {
+  margin-left: 10px;
+  color: #8b9b6a;
+}
+.slider {
+  width: 75px;
+  height: 5px;
+  border-radius: 5px;
+  background: #333;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #8b9b6a;
+  cursor: pointer;
+  transform: translateY(-5px);
+}
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #8b9b6a;
+  cursor: pointer;
+  border: none;
+  transform: translateY(-5px);
+}
+.slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  background: #111;
+  border-radius: 5px;
+  border: none;
+}
+.slider::-moz-range-track {
+  width: 100%;
+  height: 5px;
+  background: #111;
+  border-radius: 5px;
+  border: none;
+}
+.discord-status {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: -7px;
+  width: 240px;
+}
+.discord-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.discord-info {
+  text-align: left;
+  flex: 1;
+}
+.discord-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+#discord-activity {
+  color: rgb(175, 175, 175);
+}
+.status-online { background-color: #43b581; }
+.status-idle { background-color: #faa61a; }
+.status-dnd { background-color: #f04747; }
+.status-offline { background-color: #747f8d; }
