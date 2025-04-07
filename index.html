@@ -196,17 +196,9 @@
       <pattern></pattern>
       <audio loop>
         <source src="assets/media/music.mp3" type="audio/mp3" />
-        <script>
-          app.audioElement = document.querySelector('.background audio');
-          app.audioElement.volume = 0;
-        </script>
       </audio>
       <video loop muted>
         <source src="assets/media/video.mp4" type="video/mp4" />
-        <script>
-          app.videoElement = document.querySelector('.background video');
-          app.videoElement.volume = 0;
-        </script>
       </video>
     </div>    
     <a onclick="skipIntro()" class="clickables skip">{ click here }</a>
