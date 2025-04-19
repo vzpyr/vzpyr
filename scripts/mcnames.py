@@ -6,8 +6,7 @@ from colorama import Fore, Style, init
 
 init()
 
-def generate_name(length, numbers, underscores):
-    """Generates a random name following Minecraft's rules"""
+def generate(length, numbers, underscores):
     chars = string.ascii_lowercase
     if numbers:
         chars += string.digits
@@ -16,7 +15,7 @@ def generate_name(length, numbers, underscores):
     first_char = random.choice(string.ascii_lowercase)
     return first_char + ''.join(random.choices(chars, k=length-1))
 
-def check_name(name):
+def check(name):
     """Checks name availability using Mojang's API"""
     try:
         response = requests.get(f"https://api.mojang.com/users/profiles/minecraft/{name}")
@@ -36,8 +35,8 @@ def main():
         return
     available_names = []
     for _ in range(args.amount):
-        name = generate_name(args.length, args.numbers, args.underscores)
-        if check_name(name):
+        name = generate(args.length, args.numbers, args.underscores)
+        if check(name):
             print(f"{Fore.RED}{name} is claimed!{Style.RESET_ALL}")
         else:
             print(f"{Fore.GREEN}{name} is claimable!{Style.RESET_ALL}")
