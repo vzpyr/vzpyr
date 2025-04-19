@@ -51,9 +51,9 @@ def stack(target_width=100, target_height=944):
             duration=100,
             loop=0
         )
-        print(f"[+] {len(gif_files)} gif(s) stacked to stacked_gif.gif")
+        print(f"{len(gif_files)} gif(s) stacked to stacked_gif.gif")
     else:
-        print("[-] no savable frames")
+        print("no savable frames found")
 
 if __name__ == "__main__":
     stack()
