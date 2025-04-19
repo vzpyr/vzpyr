@@ -16,7 +16,6 @@ def generate(length, numbers, underscores):
     return first_char + ''.join(random.choices(chars, k=length-1))
 
 def check(name):
-    """Checks name availability using Mojang's API"""
     try:
         response = requests.get(f"https://api.mojang.com/users/profiles/minecraft/{name}")
         return response.status_code == 200
@@ -25,13 +24,13 @@ def check(name):
 
 def main():
     parser = argparse.ArgumentParser(description="Minecraft Name Checker")
-    parser.add_argument("-a", "--amount", type=int, default=1000, help="Number of names to generate")
-    parser.add_argument("-l", "--length", type=int, default=4, help="Length of the names")
-    parser.add_argument("-n", "--numbers", action="store_true", help="Allow numbers in names")
-    parser.add_argument("-u", "--underscores", action="store_true", help="Allow underscores in names")
+    parser.add_argument("-a", "--amount", type=int, default=1000, help="amount of names")
+    parser.add_argument("-l", "--length", type=int, default=4, help="name length")
+    parser.add_argument("-n", "--numbers", action="store_true", help="add numbers?")
+    parser.add_argument("-u", "--underscores", action="store_true", help="add underscores?")
     args = parser.parse_args()
     if not 3 <= args.length <= 16:
-        print(f"{Fore.RED}Error: Length must be between 3 and 16{Style.RESET_ALL}")
+        print(f"length must be between 3 and 16")
         return
     available_names = []
     for _ in range(args.amount):
