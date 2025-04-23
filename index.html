@@ -11,14 +11,13 @@
     <link rel="shortcut icon" href="assets/media/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="assets/fontawesome/all.min.css">
     <link rel="stylesheet" type="text/css" href="assets/styles.css"/>
-    <link rel="preload" href="assets/media/music.mp3" as="fetch">
-    <link rel="preload" href="assets/media/video.mp4" as="fetch">
   </head>
   <body>
     <line></line>
     <script src="assets/javascript/jquery.min.js"></script>
     <script src="assets/javascript/jquery.marquee.min.js"></script>
     <script src="assets/javascript/typed.umd.js"></script>
+    <script src="assets/javascript/magicmouse.min.js"></script>
     <script>
       'use strict';
       let videoElement;
@@ -27,6 +26,17 @@
       let backgroundToggler = false;
       const musicVolume = 0.05;
       const musicFadeIn = 1000;
+      window.addEventListener("load", (event) => {
+        const options = {
+            "outerStyle": "circle",
+            "hoverEffect": "circle-move",
+            "hoverItemMove": false,
+            "defaultCursor": false,
+            "outerWidth": 30,
+            "outerHeight": 30
+        }
+        magicMouse(options);
+      });
       document.addEventListener('DOMContentLoaded', () => {
         videoElement = document.querySelector('.background video');
         audioElement = document.querySelector('.background audio');
@@ -158,23 +168,9 @@
           </div>
         </div>        
         <br>
-        <a class="clickables" id="shop-link-1">{ projects }</a>
-        <a class="clickables" id="shop-link-2">{ socials }</a>
+        <a class="clickables" id="shop-link-1">{ socials }</a>
       </div>
       <div class="shop-content" id="shop-panel-1" style="display: none;">
-        <h1>{ projects }</h1>
-        <div>
-          <img class="card-img-top" src="assets/media/none.png" alt="Image">
-          <div class="card-body">
-            <br>
-            <a class="bold">currently none</a>
-            <br>
-            <a>check my github profile</a>
-          </div>
-        </div>
-        <a onclick="goBack()" class="clickables back" id="back-link-1">{ back }</a>
-      </div>
-      <div class="shop-content" id="shop-panel-2" style="display: none;">
         <h1>{ socials }</h1>
         <a class="clickables" onclick="openLink('https://discord.com/users/737952916123549737')" target="_blank"><i class="fab fa-discord"></i></a>
         <a class="clickables" onclick="openLink('https://t.me/vzpyr')" target="_blank"><i class="fab fa-telegram"></i></a>
