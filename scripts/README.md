@@ -1,6 +1,8 @@
 # scripts
 random scripts
 
+### filter
+- filters out every line and its following one containing a specific string
 ### mcnames
 - generates and checks minecraft names
 ### mwb-reset
