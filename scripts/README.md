@@ -10,4 +10,4 @@ random scripts
 ### renamer
 - renames all files in the current directory to their modification timestamp ("%d.%m.%Y - %H-%M")
 ### stacker
-- stacks all gifs in the current directory till a specified height (used for steam profile customization)
+- stacks all gifs in the current directory until the specified height is reached (used for steam profile customization)
