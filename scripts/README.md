@@ -1,8 +1,10 @@
 # scripts
-random scripts
+random scripts i use myself
 
+### downloader
+- downloads every second line/link in a specified file
 ### filter
-- filters out every line and its following one containing a specific string
+- filters out every line containing a specific string in a specified file + the following line and saves them
 ### mcnames
 - generates and checks minecraft names
 ### mwb-reset
