@@ -3,6 +3,7 @@ random scripts i use myself
 
 ### downloader
 - downloads every second line/link in a specified file
+- downloader-tvg-name.py is the same script but renames the output to the "tvg-name" in the line before (for m3u files)
 ### filter
 - filters out every line containing a specific string in a specified file + the following line and saves them
 ### mcnames
