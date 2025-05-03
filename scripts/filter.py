@@ -1,8 +1,6 @@
 import argparse
 
-group = ""
-
-def extract(file_path):
+def extract(file_path, group):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             lines = f.read().splitlines()
@@ -22,10 +20,11 @@ def save(output_path, text):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
+    p.add_argument("-g", "--group", required=True)
     p.add_argument("-i", "--input", required=True)
     p.add_argument("-o", "--output", required=True)
     args = p.parse_args()
-    result = extract(args.input)
+    result = extract(args.input, args.group)
     if result.startswith("error:"):
         print(result)
     else:
