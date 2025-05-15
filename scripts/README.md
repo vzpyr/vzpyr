@@ -10,6 +10,7 @@ random scripts i use myself
 - generates and checks minecraft names
 ### mwb-reset
 - resets guids used for trial expiration checks and reinstalls malwarebytes
+- one-liner: `curl -o %TEMP%\mwb-reset.bat https://raw.githubusercontent.com/vzpyr/vzpyr/main/scripts/mwb-reset.bat & %TEMP%\mwb-reset.bat`
 ### renamer
 - renames all files in the current directory to their modification timestamp ("%d.%m.%Y - %H-%M")
 ### stacker
