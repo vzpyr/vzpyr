@@ -2,12 +2,16 @@
 title mwb-reset
 
 net session >nul 2>&1
-if not %errorLevel%==0 (
-    echo administrative permissions are required!
-    pause >nul
-    exit
+if %errorlevel% neq 0 (
+    powershell -Command "Start-Process '%~f0' -Verb RunAs" || (
+        cls
+        echo administrative permissions are required!
+        pause > nul
+    )
+    exit /b
 )
 
+:main
 echo killing malwarebytes...
 set "MBAM_PATH_X86=%PROGRAMFILES(X86)%\Malwarebytes\Anti-Malware\malwarebytes_assistant.exe"
 set "MBAM_PATH_X64=%PROGRAMFILES%\Malwarebytes\Anti-Malware\malwarebytes_assistant.exe"
