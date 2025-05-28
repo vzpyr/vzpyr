@@ -15,3 +15,5 @@ random scripts i use myself
 - renames all files in the current directory to their modification timestamp ("%d.%m.%Y - %H-%M")
 ### stacker
 - stacks all gifs in the current directory until the specified height is reached (used for steam profile customization)
+### translator
+- uses google gemini to translate a srt file (subtitles) to a specified language
