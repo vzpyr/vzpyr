@@ -108,16 +108,16 @@
         $('#main').fadeOut(500, () => {
           $('#main').remove();
             new Typed('#brand', {
-            strings: ['welcome to z-n.cc', 'willkommen bei z-n.cc', 'приветствуем в z-n.cc'],
+            strings: ['welcome.', 'willkommen.', 'добро пожаловать.'],
             typeSpeed: 50,
             backSpeed: 50,
             loop: true,
           });
           const volumeSlider = document.getElementById('volume-slider');
           const volumeIcon = document.querySelector('.volume-icon i');
-          volumeSlider.value = musicVolume * 100;
+          volumeSlider.value = Math.sqrt(musicVolume) * 100;
           volumeIcon.className = 'fas fa-volume-down';
-          // videoElement.play();
+          videoElement.play();
           audioElement.play();
           $('.container').fadeIn();
           $('.background').fadeIn(200, () => {
@@ -125,7 +125,9 @@
           });
           $('.volume-control').fadeIn().css('opacity', '0.5');
           volumeSlider.addEventListener('input', function() {
-            const volumeValue = this.value / 100;
+            const linearValue = this.value / 100;
+            const scaledVolume = linearValue === 0 ? 0 : Math.pow(linearValue, 2);
+            audioElement.volume = scaledVolume;
             audioElement.volume = volumeValue;
             if (volumeValue === 0) {
               volumeIcon.className = 'fas fa-volume-mute';
@@ -173,10 +175,9 @@
       <div class="shop-content" id="shop-panel-1" style="display: none;">
         <h1>[ socials ]</h1>
         <a class="clickables" onclick="openLink('https://discord.com/users/737952916123549737')" target="_blank"><i class="fab fa-discord"></i></a>
-        <a class="clickables" onclick="openLink('https://t.me/vzpyr')" target="_blank"><i class="fab fa-telegram"></i></a>
-        <a class="clickables" onclick="openLink('https://steamcommunity.com/id/vzpyr')" target="_blank"><i class="fab fa-steam"></i></a>
-        <a class="clickables" onclick="openLink('https://open.spotify.com/user/hqm61br0tifif1dokqni3vam0')" target="_blank"><i class="fab fa-spotify"></i></a>
         <a class="clickables" onclick="openLink('https://github.com/vzpyr')" target="_blank"><i class="fab fa-github"></i></a>
+        <a class="clickables" onclick="openLink('https://open.spotify.com/user/hqm61br0tifif1dokqni3vam0')" target="_blank"><i class="fab fa-spotify"></i></a>
+        <a class="clickables" onclick="openLink('https://t.me/vzpyr')" target="_blank"><i class="fab fa-telegram"></i></a>
         <a class="clickables" onclick="openLink('https://www.youtube.com/@%E7%A5%AB')" target="_blank"><i class="fab fa-youtube"></i></a>
         <a onclick="goBack()" class="clickables back" id="back-link-2">[ go back ]</a>
       </div>      
@@ -187,19 +188,19 @@
         <i class="fas fa-volume-up"></i>
       </div>
     </div>
-    <a class="credits">by v1per</a>
+    <a class="credits">by vzpyr</a>
     <div class="background" style="display: none;">
       <pattern></pattern>
       <audio loop>
         <source src="assets/media/music.mp3" type="audio/mp3" />
       </audio>
-      <!--
       <video loop muted>
         <source src="assets/media/background.mp4" type="video/mp4" />
       </video>
-      -->
+      <!--
       <img src="assets/media/background.png">
+      -->
     </div>    
-    <a onclick="skipIntro()" class="clickables skip">{ click here }</a>
+    <a onclick="skipIntro()" class="clickables skip">[ click here ]</a>
   </body>
 </html>
