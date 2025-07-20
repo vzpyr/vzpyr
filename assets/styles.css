@@ -139,7 +139,7 @@ line {
 }
 .volume-icon {
   margin-left: 10px;
-  color: #8b9b6a;
+  color: #5a6e74;
 }
 .slider {
   width: 75px;
@@ -156,13 +156,13 @@ line {
   -webkit-appearance: none;
   width: 15px;
   height: 15px;
-  background: #8b9b6a;
+  background: #5a6e74;
   cursor: pointer;
 }
 .slider::-moz-range-thumb {
   width: 15px;
   height: 15px;
-  background: #8b9b6a;
+  background: #5a6e74;
   cursor: pointer;
   border: none;
 }
