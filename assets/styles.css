@@ -29,7 +29,7 @@ a {
   text-decoration: none;
 }
 a.clickables:hover {
-  color: #5a6e74;
+  color: #455e40;
 }
 h1 {
   color: #fff;
@@ -41,7 +41,7 @@ h1 {
 }
 line {
   width: 100%;
-  border-top: 5px solid #5a6e74;
+  border-top: 5px solid #455e40;
   position: fixed;
   top: 0;
   left: 0;
@@ -139,7 +139,7 @@ line {
 }
 .volume-icon {
   margin-left: 10px;
-  color: #5a6e74;
+  color: #455e40;
 }
 .slider {
   width: 75px;
@@ -156,13 +156,13 @@ line {
   -webkit-appearance: none;
   width: 15px;
   height: 15px;
-  background: #5a6e74;
+  background: #455e40;
   cursor: pointer;
 }
 .slider::-moz-range-thumb {
   width: 15px;
   height: 15px;
-  background: #5a6e74;
+  background: #455e40;
   cursor: pointer;
   border: none;
 }
