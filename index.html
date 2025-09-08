@@ -24,7 +24,7 @@
       let audioElement;
       let skippedIntro = false;
       let backgroundToggler = false;
-      const musicVolume = 0.05;
+      const musicVolume = 0.25;
       const musicFadeIn = 1000;
       window.addEventListener("load", (event) => {
         const options = {
@@ -73,7 +73,9 @@
             const statusDot = document.getElementById('status-dot');
             const activityElement = document.getElementById('discord-activity');
             document.getElementById('discord-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=80`;
-            document.getElementById('discord-username').textContent = user.username;
+            const displayName = user.display_name || user.global_name || user.username;
+            const formattedName = displayName !== user.username ? `${displayName} (@${user.username})` : displayName;
+            document.getElementById('discord-username').textContent = formattedName;
             statusDot.className = `status-dot status-${status}`;
             if (data.data.listening_to_spotify) {
               activityElement.textContent = `🎧 ${data.data.spotify.song} by ${data.data.spotify.artist}`.toLowerCase();
@@ -108,9 +110,9 @@
         $('#main').fadeOut(500, () => {
           $('#main').remove();
             new Typed('#brand', {
-            strings: ['welcome.', 'willkommen.', 'добро пожаловать.'],
-            typeSpeed: 50,
-            backSpeed: 50,
+            strings: ['welcome', 'willkommen', 'добро пожаловать'],
+            typeSpeed: 110,
+            backSpeed: 70,
             loop: true,
           });
           const volumeSlider = document.getElementById('volume-slider');
