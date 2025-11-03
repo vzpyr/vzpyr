@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>z-n.cc</title>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="z-n.cc | website"/>
+    <meta property="og:title" content="z-n.cc"/>
+    <meta property="og:description" content="z-n.cc | website"/>
+    <meta property="og:image" content="assets/media/favicon.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="shortcut icon" href="assets/media/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="assets/fontawesome/all.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles.css"/>
+  </head>
+  <body>
+    <line></line>
+    <script src="assets/javascript/jquery.min.js"></script>
+    <script src="assets/javascript/jquery.marquee.min.js"></script>
+    <script src="assets/javascript/typed.umd.js"></script>
+    <script src="assets/javascript/magicmouse.min.js"></script>
+    <script>
+      'use strict';
+      let videoElement;
+      let audioElement;
+      let skippedIntro = false;
+      let backgroundToggler = false;
+      const musicVolume = 0.25;
+      const musicFadeIn = 1000;
+      window.addEventListener("load", (event) => {
+        const options = {
+            "outerStyle": "circle",
+            "hoverEffect": "circle-move",
+            "hoverItemMove": false,
+            "defaultCursor": false,
+            "outerWidth": 30,
+            "outerHeight": 30
+        }
+        magicMouse(options);
+      });
+      document.addEventListener('DOMContentLoaded', () => {
+        videoElement = document.querySelector('.background video');
+        audioElement = document.querySelector('.background audio');
+        audioElement.volume = 0;
+        document.addEventListener('contextmenu', (event) => event.preventDefault());
+        document.body.onkeyup = (event) => {
+          if (event.keyCode === 32 && skippedIntro) {
+            const mediaElements = [videoElement, audioElement];
+            mediaElements.forEach(element => { backgroundToggler ? element.play() : element.pause(); });
+            backgroundToggler = !backgroundToggler;
+          }
+        };
+        document.querySelectorAll('[id^="shop-link-"]').forEach(link => {
+          link.addEventListener('click', (e) => {
+            const panelId = e.target.id.replace('shop-link-', 'shop-panel-');
+            e.preventDefault();
+            $('.index-content').addClass('fade-out');
+            setTimeout(() => {
+              $('.index-content').hide();
+              $(`#${panelId}`).show().removeClass('fade-out').addClass('fade-in');
+            }, 500);
+          });
+        });
+        updateDiscordStatus();
+        setInterval(updateDiscordStatus, 20000);
+      });
+      function updateDiscordStatus() {
+        fetch(`https://api.lanyard.rest/v1/users/737952916123549737`)
+          .then(response => response.json())
+          .then(data => {
+            if (!data.success) return;
+            const user = data.data.discord_user;
+            const status = data.data.discord_status;
+            const statusDot = document.getElementById('status-dot');
+            const activityElement = document.getElementById('discord-activity');
+            document.getElementById('discord-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=80`;
+            const displayName = user.display_name || user.global_name || user.username;
+            const formattedName = displayName !== user.username ? `${displayName} (@${user.username})` : displayName;
+            document.getElementById('discord-username').textContent = formattedName;
+            statusDot.className = `status-dot status-${status}`;
+            if (data.data.listening_to_spotify) {
+              activityElement.textContent = `🎧 ${data.data.spotify.song} by ${data.data.spotify.artist}`.toLowerCase();
+            } else if (data.data.activities.length > 0) {
+              const activity = data.data.activities[0];
+              const activityTypes = {
+                0: 'Playing',
+                1: 'Streaming',
+                2: 'Listening to',
+                3: 'Watching',
+                4: 'Custom',
+                5: 'Competing in'
+              };
+              const activityType = activityTypes[activity.type] || 'Playing';
+              let activityText = `${activityType} ${activity.name}`;
+              if (activity.type === 4 && activity.state) {
+                activityText = activity.state;
+              }
+              activityElement.textContent = activityText.toLowerCase();
+            } else {
+              activityElement.textContent = (status.charAt(0).toUpperCase() + status.slice(1)).toLowerCase();
+            }
+          }
+        );
+      }
+      function skipIntro() {
+        skippedIntro = true;
+        $('.skip').addClass('fade-out');
+        setTimeout(() => {
+          $('.skip').remove();
+        }, 500);
+        $('#main').fadeOut(500, () => {
+          $('#main').remove();
+            new Typed('#brand', {
+            strings: ['welcome', 'willkommen', 'добро пожаловать'],
+            typeSpeed: 110,
+            backSpeed: 70,
+            loop: true,
+          });
+          const volumeSlider = document.getElementById('volume-slider');
+          const volumeIcon = document.querySelector('.volume-icon i');
+          volumeSlider.value = Math.sqrt(musicVolume) * 100;
+          volumeIcon.className = 'fas fa-volume-down';
+          videoElement.play();
+          audioElement.play();
+          $('.container').fadeIn();
+          $('.background').fadeIn(200, () => {
+            $('.background audio').animate({ volume: musicVolume }, musicFadeIn);
+          });
+          $('.volume-control').fadeIn().css('opacity', '0.5');
+          volumeSlider.addEventListener('input', function() {
+            const linearValue = this.value / 100;
+            const scaledVolume = linearValue === 0 ? 0 : Math.pow(linearValue, 2);
+            audioElement.volume = scaledVolume;
+            audioElement.volume = volumeValue;
+            if (volumeValue === 0) {
+              volumeIcon.className = 'fas fa-volume-mute';
+            } else if (volumeValue < 0.5) {
+              volumeIcon.className = 'fas fa-volume-down';
+            } else {
+              volumeIcon.className = 'fas fa-volume-up';
+            }
+          });
+        });
+      }
+      function goBack() {
+        $('.shop-content').removeClass('fade-in').addClass('fade-out');
+        setTimeout(() => {
+          $('.shop-content').hide();
+          $('.index-content').show().removeClass('fade-out').addClass('fade-in');
+          setTimeout(() => {
+            $('.shop-content').removeClass('fade-out');
+            $('.index-content').removeClass('fade-in');
+          }, 500);
+        }, 500);
+      }
+      function openLink(url) {
+        window.open(url, '_blank');
+      }
+    </script>
+    <div id="main"></div>
+    <div class="container" style="display: none;">
+      <div class="index-content">
+        <h1>z-n.cc</h1>
+        <a><span id="brand"></span></a>
+        <div class="discord-status">
+          <img class="discord-avatar" id="discord-avatar" src="" alt="Discord Avatar">
+          <div class="discord-info">
+            <div class="discord-name">
+              <span class="status-dot" id="status-dot"></span>
+              <a><span id="discord-username"></span></a>
+            </div>
+            <div id="discord-activity"></div>
+          </div>
+        </div>        
+        <br>
+        <a class="clickables" id="shop-link-1">[ socials ]</a>
+      </div>
+      <div class="shop-content" id="shop-panel-1" style="display: none;">
+        <h1>[ socials ]</h1>
+        <a class="clickables" onclick="openLink('https://t.me/vzpyr')" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a onclick="goBack()" class="clickables back" id="back-link-2">[ go back ]</a>
+      </div>      
+    </div>
+    <div class="volume-control">
+      <input type="range" id="volume-slider" min="0" max="100" value="5" class="slider">
+      <div class="volume-icon">
+        <i class="fas fa-volume-up"></i>
+      </div>
+    </div>
+    <a class="credits">by vzpyr</a>
+    <div class="background" style="display: none;">
+      <pattern></pattern>
+      <audio loop>
+        <source src="assets/media/music.mp3" type="audio/mp3" />
+      </audio>
+      <video loop muted>
+        <source src="assets/media/background.mp4" type="video/mp4" />
+      </video>
+      <!--
+      <img src="assets/media/background.png">
+      -->
+    </div>    
+    <a onclick="skipIntro()" class="clickables skip">[ click here ]</a>
+  </body>
+</html>
+
+
