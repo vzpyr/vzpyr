@@ -17,7 +17,7 @@
     <script src="assets/javascript/jquery.min.js"></script>
     <script src="assets/javascript/jquery.marquee.min.js"></script>
     <script src="assets/javascript/typed.umd.js"></script>
-    <!--<script src="assets/javascript/magicmouse.min.js"></script>-->
+    <!-- <script src="assets/javascript/magicmouse.min.js"></script> -->
     <script>
       'use strict';
       let videoElement;
@@ -74,7 +74,7 @@
             const activityElement = document.getElementById('discord-activity');
             document.getElementById('discord-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=80`;
             const displayName = user.display_name || user.global_name || user.username;
-            const formattedName = displayName !== user.username ? `${displayName} (@${user.username})` : displayName;
+            const formattedName = displayName; // !== user.username ? `${displayName} (@${user.username})` : displayName;
             document.getElementById('discord-username').textContent = formattedName;
             statusDot.className = `status-dot status-${status}`;
             if (data.data.listening_to_spotify) {
@@ -172,7 +172,9 @@
           </div>
         </div>        
         <br>
-        <a class="clickables" id="shop-link-1">[ socials ]</a>
+        <a class="clickables" onclick="openLink('https://discord.com/users/737952916123549737')" target="_blank"><i class="fab fa-discord"></i></a>
+        <a class="clickables" onclick="openLink('https://t.me/vzpyr')" target="_blank"><i class="fab fa-telegram"></i></a>
+        <!-- <a class="clickables" id="shop-link-1">[ socials ]</a> -->
       </div>
       <div class="shop-content" id="shop-panel-1" style="display: none;">
         <h1>[ socials ]</h1>
@@ -202,6 +204,3 @@
     <a onclick="skipIntro()" class="clickables skip">[ click here ]</a>
   </body>
 </html>
-
-
-
